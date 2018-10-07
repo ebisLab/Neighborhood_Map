@@ -11,6 +11,16 @@ class Helper {
 			client_secret: "IP01UHEG5AKED10WFOJYIBXWN34SMOWIPAM2W3A421KTUAFN", 
 			v: "20181007"
 		};
-		return Object.keys(keys).map(key => `${key}=${keys[key]}`).join("&");
+		return Object.keys(keys)
+		.map(key => `${key}=${keys[key]}`)
+		.join("&");
 	}
+
+	static headers() {
+		return {
+			Accept: "application/json"
+		};
+	}
+
+	static simpleFetch(endPoint, method, urlParameters)
 }
