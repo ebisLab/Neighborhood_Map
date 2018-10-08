@@ -5,6 +5,10 @@ import axios from 'axios'
 
 class App extends Component {
 
+  state = {
+    venues: []
+  }
+
   //Render Map 
   //Life cycle event
   componentDidMount() {
@@ -44,13 +48,23 @@ class App extends Component {
         var map = new window.google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
           zoom: 8
-        });
+        })
+
+        //loop over our venues
+
+        //dynamic
+        this.state.venues.map(myVenue => {
 
           var marker = new window.google.maps.Marker({
-    position: {lat: -34.397, lng: 150.644},
-    map: map,
-    title: 'Hello World!'
-  });
+    position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
+    map: map
+  })
+       })
+
+          
+
+
+      
       }
 
 
