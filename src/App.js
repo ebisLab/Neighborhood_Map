@@ -31,7 +31,9 @@ class App extends Component {
 
     axios.get(endPoint + new URLSearchParams(keys))
     .then(response => {
-      console.log(response)
+      this.setState({
+        venues: response.data.response.groups[0].items
+      })
     })
     .catch(error =>{
       console.log("Error!!" + error)
@@ -43,6 +45,12 @@ class App extends Component {
           center: {lat: -34.397, lng: 150.644},
           zoom: 8
         });
+
+          var marker = new window.google.maps.Marker({
+    position: {lat: -34.397, lng: 150.644},
+    map: map,
+    title: 'Hello World!'
+  });
       }
 
 
