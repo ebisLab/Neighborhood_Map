@@ -55,14 +55,28 @@ class App extends Component {
         //dynamic
         this.state.venues.map(myVenue => {
 
+          var contentString = `${myVenue.venue.name}`
+
+          //Create an InfoWindow
+
+          var infowindow = new window.google.maps.InfoWindow({
+    content: contentString
+  });
+
+          //Create markers
+
           var marker = new window.google.maps.Marker({
     position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
-    map: map
+    map: map, 
+    title: myVenue.venue.name
   })
+
+
+          //Link marker and infowindow together
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          })
        })
-
-          
-
 
       
       }
