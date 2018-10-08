@@ -45,23 +45,23 @@ class App extends Component {
   }
 
   initMap = () => {
+
+    //Map Created
         var map = new window.google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
           zoom: 8
         })
 
-        //loop over our venues
+        //Create an InfoWindow
+          var infowindow = new window.google.maps.InfoWindow({
+    //content: contentString
+  });
 
-        //dynamic
+        //loop over our venues
+        //dynamic markers
         this.state.venues.map(myVenue => {
 
           var contentString = `${myVenue.venue.name}`
-
-          //Create an InfoWindow
-
-          var infowindow = new window.google.maps.InfoWindow({
-    content: contentString
-  });
 
           //Create markers
 
@@ -74,6 +74,11 @@ class App extends Component {
 
           //Link marker and infowindow together
           marker.addListener('click', function() {
+
+            //Change the content
+            infowindow.setContent(contentString)
+
+            //open an infowindow
             infowindow.open(map, marker);
           })
        })
