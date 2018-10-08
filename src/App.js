@@ -13,7 +13,7 @@ class App extends Component {
   //Life cycle event
   componentDidMount() {
     this.getVenues()
-    this.renderMap()
+    //this.renderMap()
   }
 
   //**renderMap = loadMap
@@ -37,7 +37,7 @@ class App extends Component {
     .then(response => {
       this.setState({
         venues: response.data.response.groups[0].items
-      })
+      }, this.renderMap() )//callback function
     })
     .catch(error =>{
       console.log("Error!!" + error)
