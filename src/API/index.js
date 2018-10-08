@@ -16,11 +16,47 @@ class Helper {
 		.join("&");
 	}
 
+	static urlBuilder(urlParameters){
+		if(!urlParameters){
+			return ""
+		}
+
+		return Object.keys(urlParameters)
+		.map(key => `${keys}=${urlParameters[key]}`)
+		.join("&");
+	}
+
 	static headers() {
 		return {
 			Accept: "application/json"
 		};
 	}
 
-	static simpleFetch(endPoint, method, urlParameters)
+	static simpleFetch(endPoint, method, urlParameters) {
+		let requestData = {
+			method, 
+			headers:  Helper.headers()
+		}
+
+		return fetch(`${Helper.baseURL()}${endPoint}?${Helper.auth()&${Helper.urlBuilder(
+			urlParameters
+			)}`
+		requestData
+
+		).then(res=> res.json());
+	}
+}
+
+export default class SquareAPI {
+	static search(urlParameters) {
+		returl Helper.simpleFetch("/venues/search", "GET", urlParameters);
+	}
+
+	static getVenueDetails(VENUE_ID){
+		return Helper.simpleFetch(`/venues/${VENUE_ID}`, "GET");
+	}
+
+	static getVenuePhotos(VENUE_ID) {
+		return Helper.simpleFetch(`/venues/${VENUE_ID}/photos`, "GET");
+	}
 }
