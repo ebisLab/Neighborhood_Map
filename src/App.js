@@ -8,6 +8,7 @@ class App extends Component {
   //Render Map 
   //Life cycle event
   componentDidMount() {
+    this.getVenues()
     this.renderMap()
   }
 
@@ -16,6 +17,25 @@ class App extends Component {
   renderMap = () => {
     loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyB7U8rnzGYWVDQjNRYv5Iy-abLyaZcFG40&callback=initMap")
     window.initMap = this.initMap
+  }
+
+  getVenues = () => {
+    const endPoint = "https://api.foursquare.com/v2/venues/explore?"
+    const keys = {
+      client_id: "02ONRBOTCO3H1QD0Y3U3ZL2V2BP1PYHPNXFQEXRAJOOIJHB1",
+      client_secret: "IP01UHEG5AKED10WFOJYIBXWN34SMOWIPAM2W3A421KTUAFN",
+      query: "hotel",
+      near: "Sydney", 
+      v: "20181007"
+    }
+
+    axios.get(endPoint + new URLSearchParams(keys))
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error =>{
+      console.log("Error!!" + error)
+    })
   }
 
   initMap = () => {
