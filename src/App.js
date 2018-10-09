@@ -64,10 +64,13 @@ class App extends Component {
         //dynamic markers
         this.state.venues.map(myVenue => {
 
-          var contentString = `${myVenue.venue.name}`
+          var contentString = `<h3>${myVenue.venue.name} </h3>
+            <p>${myVenue.venue.location.address}</p>
+            <p>${myVenue.venue.location.city} ${myVenue.venue.location.state} ${myVenue.venue.location.postalCode}</p>
+            <Img src=linkvar/>`
           //content: `${myVenue.venue.name}`
 
-          var content = (
+         /* var content = (
 
             `
             <h3>Name: ${myVenue.venue.name} </h3>
@@ -75,7 +78,7 @@ class App extends Component {
             <p>${myVenue.venue.location.city} ${myVenue.venue.location.state} ${myVenue.venue.location.postalCode}</p>
             `
 
-            )
+            )*/
 
           //Create markers
 
@@ -83,7 +86,7 @@ class App extends Component {
     position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
     map: map, 
     title: myVenue.venue.name,
-    content: content
+    //content: content
     //content: "<img src={`${myVenue.venue.bestPhoto.prefix}200x200`${myVenue.venue.bestPhoto.suffix}>"
     //animation: google.maps.Animation.DROP
   })
@@ -106,6 +109,9 @@ class App extends Component {
 
 
   render() {
+
+    
+
     return (
       <main>
       <div id="map">
