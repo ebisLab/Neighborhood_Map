@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import axios from 'axios'
+import axios from 'axios';
+//import SideBar from '.SideBar';
 
 class App extends Component {
 
@@ -54,6 +55,7 @@ class App extends Component {
 
         //Create an InfoWindow
           var infowindow = new window.google.maps.InfoWindow({
+            content: "<b>TEST IMAGE HERE</b>"
     //content: contentString
   });
 
@@ -62,13 +64,16 @@ class App extends Component {
         this.state.venues.map(myVenue => {
 
           var contentString = `${myVenue.venue.name}`
+          //content: `${myVenue.venue.name}`
 
           //Create markers
 
           var marker = new window.google.maps.Marker({
     position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
     map: map, 
-    title: myVenue.venue.name
+    title: myVenue.venue.name,
+    content: "<img src={`${myVenue.venue.bestPhoto.prefix}200x200`${myVenue.venue.bestPhoto.suffix}>"
+    //animation: google.maps.Animation.DROP
   })
 
 
