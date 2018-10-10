@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import {slide as Menu } from 'react-burger-menu'
+import {push as Menu } from 'react-burger-menu'
 
 class SideBar extends Component {
+	showSettings (event) {
+		event.preventDefault();
+	}
 
 	/*const styles = {
 
@@ -10,7 +13,9 @@ class SideBar extends Component {
 render() {
 	return (
 
+
 		<Menu>
+		<div><h2>Hello</h2></div>
 		<h1>Something</h1>
       <a className="menu-item" href="/">
         Home

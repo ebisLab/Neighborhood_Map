@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import SideBar from './SideBar';
-
+//import Menu from './Menu';
 class App extends Component {
 
   state = {
@@ -112,12 +112,17 @@ class App extends Component {
   render() {
 
     return (
-      <main>
-      <div id="App">
+      
+
+      <div id="outer-container">
+ <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
+  <main id="page-wrap">
+    <div id="App">
       <SideBar />
       <div id="map"></div>
       </div>
-      </main>
+  </main>
+</div>
 
     );
   }
