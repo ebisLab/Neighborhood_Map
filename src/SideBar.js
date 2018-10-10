@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {slide as Menu } from 'react-burger-menu'
 
 class SideBar extends Component {
 
@@ -9,13 +10,23 @@ class SideBar extends Component {
 render() {
 	return (
 
-		<div>
-		<h1>Just checking</h1>
+		<Menu>
+		<h1>Something</h1>
+      <a className="menu-item" href="/">
+        Home
+      </a>
 
-		</div>
+      <a className="menu-item" href="/laravel">
+        Laravel
+      </a>
 
-		)
-}
+      <a className="menu-item" href="/angular">
+        Angular
+      </a>
+
+    </Menu>
+		);
+};
 
 
 }

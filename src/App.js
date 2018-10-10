@@ -50,7 +50,7 @@ class App extends Component {
     //Map Created
         var map = new window.google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+          zoom: 14
         })
 
 
@@ -106,17 +106,19 @@ class App extends Component {
       
       }
 
-
+//NOTES******
+//There seems to be undefined in one of the venues' address
 
   render() {
 
-    
-
     return (
       <main>
-      <div id="map">
+      <div id="App">
+      <SideBar />
+      <div id="map"></div>
       </div>
       </main>
+
     );
   }
 }
