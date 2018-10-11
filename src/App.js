@@ -124,8 +124,16 @@ class App extends Component {
  <Menu id ="push" pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
   <main id="page-wrap">
     <div id="App">
+    <Menu className="bm-item-list">
 
-      
+    {this.state.venues.map((venue,index) => (
+                  <ListItem 
+                      venue={venue}
+                      handleItemClick={this.handleItemClick}
+                       />
+                ))}
+
+      </Menu>
       <div id="map"></div>
       </div>
   </main>
@@ -134,12 +142,9 @@ class App extends Component {
     );
   }
 }
-/*
-//map script
- </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-    async defer></script>
-    */
+
+
+
 
 function loadScript(url) {
   var index = window.document.getElementsByTagName("script")[0]

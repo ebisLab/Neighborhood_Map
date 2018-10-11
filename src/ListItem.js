@@ -1,11 +1,14 @@
 import React from 'react';
+//import { push as Menu } from 'react-burger-menu'
 
 const ListItem = (venue, handleItemClick) => {
+
 	return (
-		<div>
-		<h1>Testing</h1> 
-		</div>
-		
+
+		<li onClick={() => {
+			handleItemClick(venue)
+		}}
+		>{venue.name}</li>
 		
 		
 		);
