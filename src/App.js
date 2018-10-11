@@ -4,6 +4,7 @@ import './App.css';
 import axios from 'axios';
 import SideBar from './SideBar';
 import { push as Menu } from 'react-burger-menu'
+import ListItem from './ListItem';
 
 class App extends Component {
 
@@ -123,7 +124,8 @@ class App extends Component {
  <Menu id ="push" pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
   <main id="page-wrap">
     <div id="App">
-      <SideBar />
+
+      
       <div id="map"></div>
       </div>
   </main>
