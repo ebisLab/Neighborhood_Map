@@ -3,11 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import SideBar from './SideBar';
-//import Menu from './Menu';
+import { push as Menu } from 'react-burger-menu'
+
 class App extends Component {
 
   state = {
     venues: []
+  }
+
+  showSettings (event) {
+    event.preventDefault();
   }
 
   //Render Map 
@@ -115,7 +120,7 @@ class App extends Component {
       
 
       <div id="outer-container">
- <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
+ <Menu id ="push" pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
   <main id="page-wrap">
     <div id="App">
       <SideBar />
