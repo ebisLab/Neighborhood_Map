@@ -23,6 +23,10 @@ class App extends Component {
     //this.renderMap()
   }
 
+  handleStateChange (state) {
+    this.setState({menuOpen: state.isOpen})  
+  }
+
   //**renderMap = loadMap
 
   renderMap = () => {
@@ -124,16 +128,16 @@ class App extends Component {
  <Menu id ="push" pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
   <main id="page-wrap">
     <div id="App">
-    <Menu className="bm-item-list">
-
-    {this.state.venues.map((venue,index) => (
+<Menu className="bm-item-list">
+<input type={"search"} id={"search"} placeholder={"filter Venues"} />
+              
+                {this.state.venues.map((venue, index) => (
                   <ListItem 
-                      venue={venue}
-                      handleItemClick={this.handleItemClick}
-                       />
+                    className="bm-item"
+                    key={index}
+                    venue={venue}/>
                 ))}
-
-      </Menu>
+                </Menu>
       <div id="map"></div>
       </div>
   </main>
