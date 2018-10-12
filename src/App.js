@@ -9,7 +9,8 @@ import ListItem from './ListItem';
 class App extends Component {
 
   state = {
-    venues: []
+    venues: [],
+    handleItemClick: []
   }
 
   showSettings (event) {
@@ -55,7 +56,11 @@ class App extends Component {
     })
   }
 
+//handleItemClick=venues;
+
   initMap = () => {
+
+    this.setState({handleItemClick: this.state.venues});/**/
 
     //Map Created
         var map = new window.google.maps.Map(document.getElementById('map'), {
@@ -66,8 +71,6 @@ class App extends Component {
 
         //Create an InfoWindow
           var infowindow = new window.google.maps.InfoWindow({
-            //content: content
-    //content: contentString
   });
 
         //loop over our venues
@@ -80,19 +83,10 @@ class App extends Component {
             <Img src=linkvar/>`
           //content: `${myVenue.venue.name}`
 
-         /* var content = (
-
-            `
-            <h3>Name: ${myVenue.venue.name} </h3>
-            <p>${myVenue.venue.location.address}</p>
-            <p>${myVenue.venue.location.city} ${myVenue.venue.location.state} ${myVenue.venue.location.postalCode}</p>
-            `
-
-            )*/
 
           //Create markers
 
-          var marker = new window.google.maps.Marker({
+         const marker = new window.google.maps.Marker({
     position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
     map: map, 
     title: myVenue.venue.name,
@@ -135,7 +129,9 @@ class App extends Component {
                   <ListItem 
                     className="bm-item"
                     key={index}
-                    venue={venue}/>
+                    venue={venue}
+                    />
+                    //handleItemClick={handleItemClick}
                 ))}
                 </Menu>
       <div id="map"></div>
