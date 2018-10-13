@@ -10,7 +10,8 @@ class App extends Component {
 
   state = {
     venues: [],
-    handleItemClick: []
+    //openList
+    //handleItemClick: []
   }
 
   showSettings (event) {
@@ -77,6 +78,8 @@ class App extends Component {
         //dynamic markers
         this.state.venues.map(myVenue => {
 
+         
+
           var contentString = `<h3>${myVenue.venue.name} </h3>
             <p>${myVenue.venue.location.address}</p>
             <p>${myVenue.venue.location.city} ${myVenue.venue.location.state} ${myVenue.venue.location.postalCode}</p>
@@ -85,26 +88,29 @@ class App extends Component {
 
 
           //Create markers
-
-         const marker = new window.google.maps.Marker({
+           myVenue.marker = new window.google.maps.Marker({
     position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
     map: map, 
-    title: myVenue.venue.name,
+    title: myVenue.venue.name
     //content: content
     //content: "<img src={`${myVenue.venue.bestPhoto.prefix}200x200`${myVenue.venue.bestPhoto.suffix}>"
     //animation: google.maps.Animation.DROP
   })
 
+         
+
 
           //Link marker and infowindow together
-          marker.addListener('click', function() {
+          myVenue.marker.addListener('click', function() {
 
             //Change the content
             infowindow.setContent(contentString)
 
             //open an infowindow
-            infowindow.open(map, marker);
+            infowindow.open(map, myVenue.marker);
           })
+
+          return myVenue.marker;
        })
 
       
@@ -119,10 +125,10 @@ class App extends Component {
       
 
       <div id="outer-container">
- <Menu id ="push" pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
+ <Menu id="push" outerContainerId={ "outer-container" } />
   <main id="page-wrap">
     <div id="App">
-<Menu className="bm-item-list">
+<Menu id="push" className="bm-item-list" pageWrapId={ "page-wrap" }>
 <input type={"search"} id={"search"} placeholder={"filter Venues"} />
               
                 {this.state.venues.map((venue, index) => (

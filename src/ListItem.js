@@ -12,6 +12,10 @@ const ListItem = (venue) => {
     const venueName = venue.venue.venue.name;
     //const handleItemClick = venue;
 
+    
+
+
+
 	return (
 
 		<li onClick= {() => {
@@ -22,7 +26,6 @@ const ListItem = (venue) => {
 		
 		
 		);
-
 }
 
 export default ListItem;
