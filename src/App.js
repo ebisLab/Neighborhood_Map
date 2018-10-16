@@ -116,7 +116,7 @@ class App extends Component {
       
       }
 
-//NOTES******
+//NOTES*****
 //There seems to be undefined in one of the venues' address
 
   render() {
