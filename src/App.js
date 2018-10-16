@@ -129,7 +129,7 @@ class App extends Component {
   <main id="page-wrap">
     <div id="App">
 <Menu id="push" className="bm-item-list" pageWrapId={ "page-wrap" }>
-<input type={"search"} id={"search"} placeholder={"filter Venues"} />
+<input type={"search"} id={"search"} placeholder={"filter Venues"} onChange={(event)=> this.filterVenues(event.target.value)} />
               
                 {this.state.venues.map((venue, index) => (
                   <ListItem 
