@@ -5,11 +5,13 @@ import axios from 'axios';
 import SideBar from './SideBar';
 import { push as Menu } from 'react-burger-menu'
 import ListItem from './ListItem';
+import escapeRegExp from 'escape-string-regexp'
 
 class App extends Component {
 
   state = {
     venues: [],
+    query: ''
     //openList
     //handleItemClick: []
   }
@@ -27,6 +29,10 @@ class App extends Component {
 
   handleStateChange (state) {
     this.setState({menuOpen: state.isOpen})  
+  }
+
+  updateQuery(query){
+    this.setState({query: query.trim() });
   }
 
   //**renderMap = loadMap
@@ -121,6 +127,18 @@ class App extends Component {
 
   render() {
 
+    const { venues, query } = this.state
+    console.log(venues)
+
+    let filteredVenues
+    if(query) {
+      const match = new RegExp(escapeRegExp(query), 'i')
+      filteredVenues = venues.filter((venue)=>
+        match.test(venue.venue.name))
+    } else {
+      filteredVenues = venues
+    }
+
     return (
       
 
@@ -129,9 +147,10 @@ class App extends Component {
   <main id="page-wrap">
     <div id="App">
 <Menu id="push" className="bm-item-list" pageWrapId={ "page-wrap" }>
-<input type={"search"} id={"search"} placeholder={"filter Venues"} onChange={(event)=> this.filterVenues(event.target.value)} />
+<input type={"search"} id={"search"} placeholder={"filter Venues"} 
+onChange={(event)=> this.updateQuery(event.target.value)} />
               
-                {this.state.venues.map((venue, index) => (
+                {filteredVenues.map((venue, index) => (
                   <ListItem 
                     className="bm-item"
                     key={index}
