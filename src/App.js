@@ -35,6 +35,16 @@ class App extends Component {
     this.setState({query: query.trim() });
   }
 
+  filterVenues(query) {
+    this.myVenue.marker.forEach(marker =>{
+      marker.name.toLowerCase().includes(query.toLowerCase()) == true ? 
+      marker.setVisible(true) :
+      marker.setVisible(false);
+    });
+    this.setState({query});
+
+  }
+
   //**renderMap = loadMap
 
   renderMap = () => {
@@ -97,10 +107,11 @@ class App extends Component {
            myVenue.marker = new window.google.maps.Marker({
     position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
     map: map, 
-    title: myVenue.venue.name
+    title: myVenue.venue.name,
+    id: myVenue.venue.id,
     //content: content
     //content: "<img src={`${myVenue.venue.bestPhoto.prefix}200x200`${myVenue.venue.bestPhoto.suffix}>"
-    //animation: google.maps.Animation.DROP
+    animation: window.google.maps.Animation.DROP
   })
 
          
