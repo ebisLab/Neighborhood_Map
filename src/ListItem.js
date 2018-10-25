@@ -21,7 +21,7 @@ const ListItem = (venue) => {
 	return (
 
 		<li onClick= {() => {
-			handleItemClick(venue)
+			handleItemClick()
 		}
 	}
 		>{venueName}</li>

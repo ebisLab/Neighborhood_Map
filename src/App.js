@@ -8,6 +8,10 @@ import ListItem from './ListItem';
 import escapeRegExp from 'escape-string-regexp'
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.map=null;
+  }
 
   state = {
     venues: [],
@@ -40,6 +44,7 @@ class App extends Component {
       marker.name.toLowerCase().includes(query.toLowerCase()) == true ? 
       marker.setVisible(true) :
       marker.setVisible(false);
+      //marker.setState({venues})
     });
     this.setState({query});
 
@@ -84,6 +89,7 @@ class App extends Component {
           center: {lat: -33.783, lng: 151.177},
           zoom: 11
         })
+        this.map = map;
 
 
         //Create an InfoWindow
@@ -144,9 +150,19 @@ class App extends Component {
     let filteredVenues
     if(query) {
       const match = new RegExp(escapeRegExp(query), 'i')
-      filteredVenues = venues.filter((venue)=>
-        match.test(venue.venue.name))
-    } else {
+      filteredVenues = venues.filter((venue)=> {
+        const isMatch = match.test(venue.venue.name);
+        console.log(venue);
+        if (isMatch) {
+          venue.marker.setMap(this.map);
+        }else {
+          venue.marker.setMap(null);
+        }
+        return isMatch;
+      
+        //match.test(venue.venue.name))
+      //}
+    }); else {
       filteredVenues = venues
     }
 
