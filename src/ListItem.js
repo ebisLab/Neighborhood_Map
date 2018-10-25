@@ -5,7 +5,9 @@ import React from 'react';
 
 
 const ListItem = (venue) => {
-	const handleItemClick = place => {
+	const handleItemClick = () => {
+		const place = venue.venue;
+		console.log(place.marker);
 		window.google.maps.event.trigger(place.marker, "click")
 	}
 
