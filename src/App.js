@@ -155,14 +155,14 @@ class App extends Component {
         console.log(venue);
         if (isMatch) {
           venue.marker.setMap(this.map);
-        }else {
+        } else {
           venue.marker.setMap(null);
         }
         return isMatch;
       
         //match.test(venue.venue.name))
       //}
-    }); else {
+    });} else {
       filteredVenues = venues
     }
 
