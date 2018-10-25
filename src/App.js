@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import SideBar from './SideBar';
-import { push as Menu } from 'react-burger-menu'
+//import SideBar from './SideBar';
+import { push as Menu } from 'react-burger-menu';
 import ListItem from './ListItem';
+import ErrorBoundary from './ErrorBoundary';
 import escapeRegExp from 'escape-string-regexp'
 
 class App extends Component {
@@ -136,6 +137,7 @@ class App extends Component {
           return myVenue.marker;
        })
 
+
       
       }
 
@@ -173,6 +175,7 @@ class App extends Component {
  <Menu id="push" outerContainerId={ "outer-container" } />
   <main id="page-wrap">
     <div id="App">
+    <ErrorBoundary>
 <Menu id="push" className="bm-item-list" pageWrapId={ "page-wrap" }>
 <input type={"search"} id={"search"} placeholder={"filter Venues"} 
 onChange={(event)=> this.updateQuery(event.target.value)} />
@@ -186,6 +189,7 @@ onChange={(event)=> this.updateQuery(event.target.value)} />
                     //handleItemClick={handleItemClick}
                 ))}
                 </Menu>
+                </ErrorBoundary>
       <div id="map"></div>
       </div>
   </main>
