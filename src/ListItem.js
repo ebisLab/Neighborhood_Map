@@ -23,7 +23,7 @@ const ListItem = (venue) => {
 		
 
 		<ol className ="venueList" aria-label = "Ordered List of Venues">
-		<li className="venueList" aria-label = {venue.venue.name} onClick= {() => {
+		<li className="venueList" aria-label = {venue.venue.name} tabIndex="0" role="link" onClick= {() => {
 			handleItemClick()
 		}
 	}

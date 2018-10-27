@@ -188,11 +188,11 @@ class App extends Component {
   
     <div id="App">
     
-    <ErrorBoundary>
-<Menu>
+    <ErrorBoundary {...this.props}>
+<Menu tabIndex="0">
 <input type={"search"} id={"search"} placeholder={"filter Venues"} 
 onChange={(event)=> this.updateQuery(event.target.value)} 
-aria-label = "Search Venues" />
+aria-label = "Search Venues"  tabIndex = "0" role="search"/>
               
                 {filteredVenues.map((venue, index) => (
                   <ListItem 
@@ -200,7 +200,7 @@ aria-label = "Search Venues" />
                     key={index}
                     venue={venue}
                     aria-label = {venue.venue.name}
-                    tabIndex = "0"
+                    
                     />
                     
                 ))}

@@ -1,7 +1,7 @@
 //Component based on the ErrorBoundary example code in the 
-//React documentation:https://reactjs.org/docs/error-boundaries.html
+//React documentation:https://reactjs.org/docs/error-boundary
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 //import { push as Menu } from 'react-burger-menu'
 
@@ -10,33 +10,27 @@ import React, { Component } from 'react';
 
 class ErrorBoundary extends Component {
 
-	constructor(props){
-		super(props);
-		this.state ={ hasError: false, error: null, errorInfo: null};
-	}
+	constructor(props) {
+        super(props)
+        this.state = {hasError: false}
+    }
 
-	componentDidCatch(error, info) {
+    componentDidCatch(error) {
+        // Display fallback UI
+        this.setState({hasError: true})
+        this.props.handleError(
+            error,
+            `Google Maps failed to load.
+            See the JavaScript console for details.`)
+    }
 
-		//Display fallback UI
-		this.setState({hasError: true, error: error, errorInfo: info});
-
-	}
-
-	render() {
-		if (this.state.hasError) {
-			return(
-				<div>
-				<h1>Oops, something went wrong:</h1>
-				<p>The error: {this.state.error.toString()}</p>
-				<p>Where it occured: {this.state.info.componentStack}</p>
-				</div>
-
-				);
-
-			
-		}
-		return this.props.children;
-	}
+    render() {
+        if (!this.state.hasError) {
+            return this.props.children
+        } else {
+            return null
+        }
+    }
 } 
 
 export default ErrorBoundary;
