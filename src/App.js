@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 //import SideBar from './SideBar';
-import { push as Menu } from 'react-burger-menu';
+import { slide as Menu } from 'react-burger-menu';
 import ListItem from './ListItem';
 import ErrorBoundary from './ErrorBoundary';
 import escapeRegExp from 'escape-string-regexp'
+
+window.gm_authFailure = ()=>{alert("Please check your Google API key")}
 
 class App extends Component {
   constructor(props){
@@ -42,7 +44,7 @@ class App extends Component {
 
   filterVenues(query) {
     this.myVenue.marker.forEach(marker =>{
-      marker.name.toLowerCase().includes(query.toLowerCase()) == true ? 
+      marker.name.toLowerCase().includes(query.toLowerCase()) === true ? 
       marker.setVisible(true) :
       marker.setVisible(false);
       //marker.setState({venues})
@@ -55,6 +57,7 @@ class App extends Component {
 
   renderMap = () => {
     loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyB7U8rnzGYWVDQjNRYv5Iy-abLyaZcFG40&callback=initMap")
+    //window.addEventListener('touchstart', passive: true);
     window.initMap = this.initMap
   }
 
@@ -106,7 +109,12 @@ class App extends Component {
           var contentString = `<h3>${myVenue.venue.name} </h3>
             <p>${myVenue.venue.location.address}</p>
             <p>${myVenue.venue.location.city} ${myVenue.venue.location.state} ${myVenue.venue.location.postalCode}</p>
-            <Img src=linkvar/>`
+            <p><strong>
+        ${'<a href="https://foursquare.com/v/' +
+          myVenue.venue.id +
+          '" target="_blank">Learn More...</a>'}
+       </strong> </p>`
+            //<Img src=linkvar/>`
           //content: `${myVenue.venue.name}`
 
 
@@ -122,22 +130,27 @@ class App extends Component {
   })
 
          
-
+//window.addEventListener('touchstart', handleItemClick, true);
 
           //Link marker and infowindow together
           myVenue.marker.addListener('click', function() {
-
+//document.addEventListener('touchstart', contentString, true);
             //Change the content
+
+            
+
+
             infowindow.setContent(contentString)
 
             //open an infowindow
             infowindow.open(map, myVenue.marker);
+
           })
 
           return myVenue.marker;
        })
 
-
+//window.addEventListener('touchstart', map, true);
       
       }
 
@@ -147,7 +160,7 @@ class App extends Component {
   render() {
 
     const { venues, query } = this.state
-    console.log(venues)
+    //console.log(venues)
 
     let filteredVenues
     if(query) {
@@ -171,12 +184,13 @@ class App extends Component {
     return (
       
 
-      <div id="outer-container">
- <Menu id="push" outerContainerId={ "outer-container" } />
-  <main id="page-wrap">
+      
+ 
+  
     <div id="App">
+    
     <ErrorBoundary>
-<Menu id="push" className="bm-item-list" pageWrapId={ "page-wrap" }>
+<Menu pageWrapId={"page-wrap"} outerContainerId={ "outer-container" }>
 <input type={"search"} id={"search"} placeholder={"filter Venues"} 
 onChange={(event)=> this.updateQuery(event.target.value)} />
               
@@ -191,9 +205,12 @@ onChange={(event)=> this.updateQuery(event.target.value)} />
                 </Menu>
                 </ErrorBoundary>
       <div id="map"></div>
+      
       </div>
-  </main>
-</div>
+      
+      
+  
+
 
     );
   }
