@@ -134,7 +134,6 @@ class App extends Component {
 
           //Link marker and infowindow together
           myVenue.marker.addListener('click', function() {
-//document.addEventListener('touchstart', contentString, true);
             //Change the content
 
             
@@ -144,13 +143,13 @@ class App extends Component {
 
             //open an infowindow
             infowindow.open(map, myVenue.marker);
+            //myVenue.marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
 
           })
 
           return myVenue.marker;
        })
 
-//window.addEventListener('touchstart', map, true);
       
       }
 
@@ -190,17 +189,20 @@ class App extends Component {
     <div id="App">
     
     <ErrorBoundary>
-<Menu pageWrapId={"page-wrap"} outerContainerId={ "outer-container" }>
+<Menu>
 <input type={"search"} id={"search"} placeholder={"filter Venues"} 
-onChange={(event)=> this.updateQuery(event.target.value)} />
+onChange={(event)=> this.updateQuery(event.target.value)} 
+aria-label = "Search Venues" />
               
                 {filteredVenues.map((venue, index) => (
                   <ListItem 
                     className="bm-item"
                     key={index}
                     venue={venue}
+                    aria-label = {venue.venue.name}
+                    tabIndex = "0"
                     />
-                    //handleItemClick={handleItemClick}
+                    
                 ))}
                 </Menu>
                 </ErrorBoundary>

@@ -64,7 +64,10 @@ This is how structured my React Components
 - [Project 7 Tutorial by Ryan Waite](https://www.youtube.com/watch?v=LvQe7xrUh7I&t=165s)
 - [Web Accessibility Checklist](https://a11yproject.com/checklist)
 
+### Service Worker
+- Standard Service Worker has been enabled, and works in production build. 
+
 ### Special Thanks
 
-Many thanks to the Udacity Slack Community for the abundant help and tips and the following people for the help:
-- Sara-FEND, JamesDBarlett3, drunkenkismet[FEND], hColleen, Rodrick, Sachin, Xavier. 
+Many thanks to the Udacity Slack Community for the abundant help and tips. I would like to extend my gratitude to the following people for their help:
+- Sara-FEND, JamesDBarlett3, drunkenkismet[FEND], hColleen, Rodrick, Sachin, Xavier FEND. 

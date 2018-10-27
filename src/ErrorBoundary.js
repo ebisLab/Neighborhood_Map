@@ -1,3 +1,6 @@
+//Component based on the ErrorBoundary example code in the 
+//React documentation:https://reactjs.org/docs/error-boundaries.html
+
 import React, { Component } from 'react';
 
 //import { push as Menu } from 'react-burger-menu'

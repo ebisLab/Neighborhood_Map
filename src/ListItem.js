@@ -20,11 +20,16 @@ const ListItem = (venue) => {
 
 	return (
 
-		<li onClick= {() => {
+		
+
+		<ol className ="venueList" aria-label = "Ordered List of Venues">
+		<li className="venueList" aria-label = {venue.venue.name} onClick= {() => {
 			handleItemClick()
 		}
 	}
 		>{venueName}</li>
+		</ol>
+
 		
 		
 		);
