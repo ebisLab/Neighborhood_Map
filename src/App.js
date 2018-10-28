@@ -8,7 +8,7 @@ import ListItem from './ListItem';
 import ErrorBoundary from './ErrorBoundary';
 import escapeRegExp from 'escape-string-regexp'
 
-//window.gm_authFailure = ()=>{alert("Please check your Google API key")}
+window.gm_authFailure = ()=>{alert("Please check your Google API key")}
 
 class App extends Component {
   constructor(props){
@@ -206,7 +206,7 @@ class App extends Component {
   
     <div id="App">
     
-    <ErrorBoundary {...this.props}>
+    <ErrorBoundary>
 <Menu tabIndex="0">
 <input type={"search"} id={"search"} placeholder={"filter Venues"} 
 onChange={(event)=> this.updateQuery(event.target.value)} 
