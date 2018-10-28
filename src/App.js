@@ -8,7 +8,7 @@ import ListItem from './ListItem';
 import ErrorBoundary from './ErrorBoundary';
 import escapeRegExp from 'escape-string-regexp'
 
-window.gm_authFailure = ()=>{alert("Please check your Google API key")}
+//window.gm_authFailure = ()=>{alert("Please check your Google API key")}
 
 class App extends Component {
   constructor(props){
@@ -78,7 +78,8 @@ class App extends Component {
       }, this.renderMap() )//callback function
     })
     .catch(error =>{
-      console.log("Error!!" + error)
+      alert('Oops, the API key seems wrong')
+      //<h1>Oops, there's a problem with the API</h1>
     })
   }
 
@@ -145,7 +146,7 @@ class App extends Component {
             let icon = myVenue.marker.getIcon();
             if (icon === undefined || icon.indexOf('marker_green')) {
               myVenue.marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-              myVenue.marker.setZIndex(100); //This brings the marker infront of the others if  selected or actie
+              myVenue.marker.setZIndex(100); //This brings the marker infront of the others if  selected or active
               this.map.setZoom(13); //zooms to marker when selected
               this.map.setCenter(myVenue.marker.position) //centers to marker when selected
             } else {

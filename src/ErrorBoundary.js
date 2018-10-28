@@ -1,36 +1,30 @@
 //Component based on the ErrorBoundary example code in the 
 //React documentation:https://reactjs.org/docs/error-boundary
 
-import { Component } from 'react';
+//import { Component } from 'react';
 
 //import { push as Menu } from 'react-burger-menu'
 
 
 
 
-class ErrorBoundary extends Component {
+import React, { Component } from 'react'
 
-	constructor(props) {
-        super(props)
-        this.state = {hasError: false}
+export default class ErrorBoundary extends Component {
+    constructor(props) {
+      super(props);
+      this.state = { hasError: false, errorInfo: null };
     }
-
-    componentDidCatch(error) {
-        // Display fallback UI
-        this.setState({hasError: true})
-        this.props.handleError(
-            error,
-            `Google Maps failed to load.
-            See the JavaScript console for details.`)
+  
+    componentDidCatch(error, info) {
+      // Display fallback UI
+      this.setState({ hasError: true, errorInfo: info });
     }
-
+  
     render() {
-        if (!this.state.hasError) {
-            return this.props.children
-        } else {
-            return null
-        }
+      if (this.state.hasError) {
+        return <h1>Google Maps API has failed. Please check your connection and try again.</h1>;
+      }
+      return this.props.children;
     }
-} 
-
-export default ErrorBoundary;
+  }
