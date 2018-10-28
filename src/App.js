@@ -124,6 +124,7 @@ class App extends Component {
     map: map, 
     title: myVenue.venue.name,
     id: myVenue.venue.id,
+
     //content: content
     //content: "<img src={`${myVenue.venue.bestPhoto.prefix}200x200`${myVenue.venue.bestPhoto.suffix}>"
     animation: window.google.maps.Animation.DROP
@@ -132,23 +133,39 @@ class App extends Component {
          
 //window.addEventListener('touchstart', handleItemClick, true);
 
+
+
           //Link marker and infowindow together
           myVenue.marker.addListener('click', function() {
             //Change the content
 
-            
-
 
             infowindow.setContent(contentString)
+
+            let icon = myVenue.marker.getIcon();
+            if (icon === undefined || icon.indexOf('marker_green')) {
+              myVenue.marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+              myVenue.marker.setZIndex(100); //This brings the marker infront of the others if  selected or actie
+              this.map.setZoom(13); //zooms to marker when selected
+              this.map.setCenter(myVenue.marker.position) //centers to marker when selected
+            } else {
+              myVenue.marker.setIcon('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png');
+            }
 
             //open an infowindow
             infowindow.open(map, myVenue.marker);
             //myVenue.marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
 
+
+
           })
+
+
 
           return myVenue.marker;
        })
+
+
 
       
       }
