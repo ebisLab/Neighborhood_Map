@@ -94,7 +94,14 @@ console.error(err)
   initMap = () => {
 
     this.setState({handleItemClick: this.state.venues});/**/
-
+    const scaledSize = new window.google.maps.Size(26, 43)
+     const redMarker = {url: 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png',
+            scaledSize
+          }
+          let greenMarker = {
+            url: 'https://www.google.com/mapfiles/marker_green.png',
+            //scaledSize
+          }
     //Map Created
         var map = new window.google.maps.Map(document.getElementById('map'), {
           center: {lat: -33.783, lng: 151.177},
@@ -124,7 +131,7 @@ console.error(err)
           '" target="_blank">Learn More...</a>'}
        </strong> </p>`
             //<Img src=linkvar/>`
-          //content: `${myVenue.venue.name}`
+          
 
 
           //Create markers
@@ -133,8 +140,8 @@ console.error(err)
     map: map, 
     title: myVenue.venue.name,
     id: myVenue.venue.id,
+    scaledSize,
 
-    //content: content
     //content: "<img src={`${myVenue.venue.bestPhoto.prefix}200x200`${myVenue.venue.bestPhoto.suffix}>"
     animation: window.google.maps.Animation.DROP
   })
@@ -152,10 +159,18 @@ console.error(err)
             infowindow.setContent(contentString)
 
             let icon = myVenue.marker.getIcon();
-            if (icon === undefined || (icon !== undefined && icon.indexOf('marker_green') === -1)) {
-              myVenue.marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-            } else {
-              myVenue.marker.setIcon('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png');
+            /*let redMarker = {url: 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png',
+            scaledSize
+          }
+          let greenMarker = {
+            url: 'https://www.google.com/mapfiles/marker_green.png',
+            //scaledSize
+          }*/
+
+            if (icon === undefined || icon === redMarker) {
+
+              myVenue.marker.setIcon(greenMarker);
+              myVenue.marker.setZIndex(9999)
             }
 
             /*let icon = myVenue.marker.getIcon();
@@ -169,10 +184,8 @@ console.error(err)
             }*/
 
             //open an infowindow
-            console.log('List Item clicked - Before open');
+            
             infowindow.open(map, myVenue.marker);
-            console.log('List Item clicked - After open');
-            //myVenue.marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
 
 
 
