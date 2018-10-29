@@ -56,7 +56,7 @@ class App extends Component {
   //**renderMap = loadMap
 
   renderMap = () => {
-    loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyB7U8rnzGYWVDQjNRYv5Iy-abLyaZcFG40&callback=initMap")
+    loadScript("https://maps.googleapis.com/maps/api/js?client=gme-nianticinc&callback=initMap")
     //window.addEventListener('touchstart', passive: true);
     window.initMap = this.initMap
   }
@@ -105,10 +105,12 @@ class App extends Component {
         //dynamic markers
         this.state.venues.map(myVenue => {
 
-         
+         const address = myVenue.venue.location.address ? 
+         myVenue.venue.location.address : ''
 
           var contentString = `<h3>${myVenue.venue.name} </h3>
-            <p>${myVenue.venue.location.address}</p>
+          <p>${address}</p>
+            
             <p>${myVenue.venue.location.city} ${myVenue.venue.location.state} ${myVenue.venue.location.postalCode}</p>
             <p><strong>
         ${'<a href="https://foursquare.com/v/' +
@@ -144,6 +146,13 @@ class App extends Component {
             infowindow.setContent(contentString)
 
             let icon = myVenue.marker.getIcon();
+            if (icon === undefined || (icon !== undefined && icon.indexOf('marker_green') === -1)) {
+              myVenue.marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
+            } else {
+              myVenue.marker.setIcon('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png');
+            }
+
+            /*let icon = myVenue.marker.getIcon();
             if (icon === undefined || icon.indexOf('marker_green')) {
               myVenue.marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
               myVenue.marker.setZIndex(100); //This brings the marker infront of the others if  selected or active
@@ -151,10 +160,12 @@ class App extends Component {
               this.map.setCenter(myVenue.marker.position) //centers to marker when selected
             } else {
               myVenue.marker.setIcon('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png');
-            }
+            }*/
 
             //open an infowindow
+            console.log('List Item clicked - Before open');
             infowindow.open(map, myVenue.marker);
+            console.log('List Item clicked - After open');
             //myVenue.marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
 
 
