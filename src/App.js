@@ -56,9 +56,15 @@ class App extends Component {
   //**renderMap = loadMap
 
   renderMap = () => {
+    try {
     loadScript("https://maps.googleapis.com/maps/api/js?client=gme-nianticinc&callback=initMap")
     //window.addEventListener('touchstart', passive: true);
     window.initMap = this.initMap
+  }
+  catch(err) {
+console.error(err)
+    alert('An error occured. Please check your google settings. ')
+  }
   }
 
   getVenues = () => {
@@ -78,7 +84,7 @@ class App extends Component {
       }, this.renderMap() )//callback function
     })
     .catch(error =>{
-      alert('Oops, the API key seems wrong')
+      alert('Some error occurred while retrieving the data from Foursquare. Please check console for details')
       //<h1>Oops, there's a problem with the API</h1>
     })
   }
