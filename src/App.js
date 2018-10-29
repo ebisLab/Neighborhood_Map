@@ -140,11 +140,12 @@ console.error(err)
     map: map, 
     title: myVenue.venue.name,
     id: myVenue.venue.id,
-    scaledSize,
+    scaledSize,//marker size matches default size
 
     //content: "<img src={`${myVenue.venue.bestPhoto.prefix}200x200`${myVenue.venue.bestPhoto.suffix}>"
     animation: window.google.maps.Animation.DROP
   })
+           myVenue.marker.isOpen = false
 
          
 //window.addEventListener('touchstart', handleItemClick, true);
@@ -167,8 +168,10 @@ console.error(err)
             //scaledSize
           }*/
 
-            if (icon === undefined || icon === redMarker) {
-
+            if (!myVenue.marker.isOpen && (icon === undefined || icon === redMarker)) {
+              console.log(myVenue.marker.isOpen)
+              myVenue.marker.isOpen = true
+              console.log(myVenue.marker.isOpen)
               myVenue.marker.setIcon(greenMarker);
               myVenue.marker.setZIndex(9999)
             }
