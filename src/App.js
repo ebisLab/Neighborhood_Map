@@ -19,8 +19,6 @@ class App extends Component {
   state = {
     venues: [],
     query: ''
-    //openList
-    //handleItemClick: []
   }
 
   showSettings (event) {
@@ -31,7 +29,6 @@ class App extends Component {
   //Life cycle event
   componentDidMount() {
     this.getVenues()
-    //this.renderMap()
   }
 
   handleStateChange (state) {
@@ -58,7 +55,6 @@ class App extends Component {
   renderMap = () => {
     try {
     loadScript("https://maps.googleapis.com/maps/api/js?client=gme-nianticinc&callback=initMap")
-    //window.addEventListener('touchstart', passive: true);
     window.initMap = this.initMap
   }
   catch(err) {
@@ -85,7 +81,6 @@ console.error(err)
     })
     .catch(error =>{
       alert('Some error occurred while retrieving the data from Foursquare. Please check console for details')
-      //<h1>Oops, there's a problem with the API</h1>
     })
   }
 
@@ -93,6 +88,7 @@ console.error(err)
 
   initMap = () => {
 
+    const markersArr=[];
     this.setState({handleItemClick: this.state.venues});/**/
     const scaledSize = new window.google.maps.Size(26, 43)
      const redMarker = {url: 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png',
@@ -117,7 +113,6 @@ console.error(err)
         //loop over our venues
         //dynamic markers
         this.state.venues.map(myVenue => {
-
          const address = myVenue.venue.location.address ? 
          myVenue.venue.location.address : ''
 
@@ -131,8 +126,6 @@ console.error(err)
           '" target="_blank">Learn More...</a>'}
        </strong> </p>`
             //<Img src=linkvar/>`
-          
-
 
           //Create markers
            myVenue.marker = new window.google.maps.Marker({
@@ -142,67 +135,54 @@ console.error(err)
     id: myVenue.venue.id,
     scaledSize,//marker size matches default size
 
-    //content: "<img src={`${myVenue.venue.bestPhoto.prefix}200x200`${myVenue.venue.bestPhoto.suffix}>"
     animation: window.google.maps.Animation.DROP
-  })
-           myVenue.marker.isOpen = false
-
-         
-//window.addEventListener('touchstart', handleItemClick, true);
-
-
+  });
+           myVenue.marker.isOpen = false;
+           markersArr.push(myVenue);
 
           //Link marker and infowindow together
           myVenue.marker.addListener('click', function() {
             //Change the content
+            infowindow.setContent(contentString);
+            console.log(myVenue.marker);
 
+            markersArr.forEach(venue => {
+              console.log(venue);
+              venue.isOpen = false;
+              venue.marker.setIcon(redMarker);
+            });
 
-            infowindow.setContent(contentString)
-
-            let icon = myVenue.marker.getIcon();
-            /*let redMarker = {url: 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png',
-            scaledSize
-          }
-          let greenMarker = {
-            url: 'https://www.google.com/mapfiles/marker_green.png',
-            //scaledSize
-          }*/
-
-            if (!myVenue.marker.isOpen && (icon === undefined || icon === redMarker)) {
-              console.log(myVenue.marker.isOpen)
+              //Markers switch color when another marker is selected. 
               myVenue.marker.isOpen = true
-              console.log(myVenue.marker.isOpen)
+              //console.log(myVenue.marker.isOpen)
               myVenue.marker.setIcon(greenMarker);
-              myVenue.marker.setZIndex(9999)
-            }
-
-            /*let icon = myVenue.marker.getIcon();
-            if (icon === undefined || icon.indexOf('marker_green')) {
-              myVenue.marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-              myVenue.marker.setZIndex(100); //This brings the marker infront of the others if  selected or active
-              this.map.setZoom(13); //zooms to marker when selected
-              this.map.setCenter(myVenue.marker.position) //centers to marker when selected
-            } else {
-              myVenue.marker.setIcon('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png');
-            }*/
+              myVenue.marker.setZIndex(9999);
 
             //open an infowindow
             
             infowindow.open(map, myVenue.marker);
-
-
-
-          })
-
-
+          });
 
           return myVenue.marker;
-       })
+       });
 
+      window.google.maps.event.addListener(infowindow, "closeclick", ()=>
+        {
+          this.state.venues.forEach(venue => {
+            venue.isOpen = false;
+            venue.marker.setIcon(redMarker);
+          });
+        });
 
-
-      
-      }
+       window.google.maps.event.addListener(infowindow, "click", ()=>
+        {
+          this.state.venues.forEach(venue => {
+            infowindow.close();
+            venue.isOpen = false;
+            venue.marker.setIcon(redMarker);
+          });
+        });     
+      };
 
 //NOTES*****
 //There seems to be undefined in one of the venues' address
