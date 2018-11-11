@@ -12,6 +12,7 @@
 ## Introduction
 
 This is a single page map application that shows hotel venues around Sydney area.
+This [demo](https://ebislab.github.io/react_map) version is identical to this project, however it displays Tech Startups in the Indianapolis area.
 
 The page consist of a Google Map and Location markers. The sidebar contains the list of all the venues. Clicking either the markers or list items will open an InfoWindow that shows more details about the venue.
 
